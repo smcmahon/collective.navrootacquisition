@@ -1,0 +1,21 @@
+<configure
+    xmlns="http://namespaces.zope.org/zope"
+    xmlns:monkey="http://namespaces.plone.org/monkey"
+    i18n_domain="collective.monkeypatcher">
+
+    <include package="collective.monkeypatcher" />
+
+    <adapter
+        factory=".traverse.NavigationRootTraverse"
+        provides="zope.publisher.interfaces.IPublishTraverse"
+        />
+
+    <monkey:patch
+        description="Patches getNavigationRootObject to respect acquisition"
+        module="plone.app.layout.navigation.root"
+        original="getNavigationRootObject"
+        replacement=".patch.getNavigationRootObject"
+        handler=".patch.handleApplyPatch"
+        />
+
+</configure>
