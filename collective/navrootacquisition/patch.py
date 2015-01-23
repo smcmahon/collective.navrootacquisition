@@ -6,7 +6,7 @@ _old_getNavigationRootObject = None
 
 def getNavigationRootObject(context, portal):
     # look for our request annotation
-    nav_root = getattr(context.REQUEST, 'navigation_root')
+    nav_root = getattr(context.REQUEST, 'navigation_root', None)
     if nav_root is None:
         return _old_getNavigationRootObject(context, portal)
     else:
