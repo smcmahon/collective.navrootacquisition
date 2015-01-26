@@ -1,16 +1,15 @@
-from Acquisition import (aq_base, aq_parent, aq_inner)
-from plone.app.layout.navigation.interfaces import INavigationRoot
 
 _old_getNavigationRootObject = None
 
 
 def getNavigationRootObject(context, portal):
     # look for our request annotation
-    nav_root = getattr(context.REQUEST, 'navigation_root', None)
-    if nav_root is None:
-        return _old_getNavigationRootObject(context, portal)
-    else:
-        return nav_root
+    request = getattr(context, 'REQUEST', None)
+    if request is not None:
+        nav_root = getattr(request, 'navigation_root', None)
+        if nav_root is not None:
+            return nav_root
+    return _old_getNavigationRootObject(context, portal)
 
 
 def handleApplyPatch(scope, original, replacement):
