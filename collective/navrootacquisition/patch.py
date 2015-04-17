@@ -7,7 +7,8 @@ def getNavigationRootObject(context, portal):
     request = getattr(context, 'REQUEST', None)
     if request is not None:
         nav_root = getattr(request, 'navigation_root', None)
-        if nav_root is not None:
+        if nav_root is not None and \
+           nav_root.getPhysicalPath() != portal.getPhysicalPath():
             return nav_root
     return _old_getNavigationRootObject(context, portal)
 

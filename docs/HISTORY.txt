@@ -4,4 +4,11 @@ Changelog
 1.0dev (unreleased)
 -------------------
 
+- Views like search could fool the request/marker mechanism
+  because they somehow don't traverse the nav root.
+  So, check to make sure that something odd like this
+  hasn't happened by comparing the path from the
+  request-based nav root. If they differ, use the old
+  mechanism.
+
 - Initial release
